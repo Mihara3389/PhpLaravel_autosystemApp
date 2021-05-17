@@ -71,3 +71,7 @@ body{
     background: #2ecc71;
      
 }
+/** 文字を大文字小文字と区別する **/
+.box h1{
+    text-transform:none;
+} 
