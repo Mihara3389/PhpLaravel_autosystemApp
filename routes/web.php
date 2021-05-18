@@ -22,5 +22,5 @@ Auth::routes();
 
 //Top
 Route::get('auth/top', 'App\Http\Controllers\Auth\TopController@index')->name("top");
-//Index
+//History
 Route::post('auth/top', 'App\Http\Controllers\Auth\TopController@history')->name("history");
