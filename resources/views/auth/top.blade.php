@@ -6,9 +6,9 @@
         <h1>{{ __('Top') }}</h1>
             <form method="POST" action="{{ route('top') }}">
             @csrf
-                <button type="submit" value="list">{{ __('問題と答えを確認・登録する　＞') }}</button>  
-                <button type="submit" value="test">{{ __('テストをする　　　　　　　　＞') }}</button>
-                <button type="submit" value="history">{{ __('過去の採点結果をみる　　　　＞') }}</button>
+                <input type="submit" name='list' value='問題と答えを確認・登録する　＞'>
+                <input type="submit" name='test' value='テストをする　　　　　　　　＞'>
+                <input type="submit" name='history' value='過去の採点結果をみる　　　　＞'>
             </form>
     </div>
 </div>

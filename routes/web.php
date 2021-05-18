@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Login
 Route::get('/', function () {
     return view('auth/login');
 });
 
 Auth::routes();
 
-Route::get('auth/top', [App\Http\Controllers\Auth\TopController::class, 'index'])->name('top');
+//Top
+Route::get('auth/top', 'App\Http\Controllers\Auth\TopController@index')->name("top");
+//Index
+Route::post('auth/top', 'App\Http\Controllers\Auth\IndexController@postIndex')->name("top");
+Route::post('auth/top', function () {return view('auth/history');})->name('history');
