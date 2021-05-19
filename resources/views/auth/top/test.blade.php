@@ -19,7 +19,8 @@
                 </tr>
             </table>
             @endforeach
+            <br>
+            <input type="submit" name="check" value="Check">
         </form>
-        <input id="submit" type="submit" name="submit" value="Check">
-    </div>
+      </div>
 </div>
