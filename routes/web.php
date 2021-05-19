@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Login
 Route::get('/', function () {
     return view('auth/login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Top
+Route::get('auth/top', 'App\Http\Controllers\Auth\TopController@index')->name("top");
+//History
+Route::post('auth/top', 'App\Http\Controllers\Auth\TopController@history')->name("history");
