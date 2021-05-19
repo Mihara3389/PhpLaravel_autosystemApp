@@ -4,7 +4,7 @@
 <div class="container">
     <div class="box">
         <h1>{{ __('History') }}</h1>
-            <form method="POST" action="{{ route('history') }}">
+            <form method="POST" action="{{ route('top.history') }}">
             @csrf
     
             <table>
