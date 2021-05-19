@@ -25,3 +25,4 @@ Route::get('auth/top', 'App\Http\Controllers\Auth\TopController@index')->name("t
 Route::post('auth/top','App\Http\Controllers\Auth\TopController@postIndex')->name("top");
 Route::get('auth/top/test', 'App\Http\Controllers\Auth\TopController@postIndex')->name("top.test");
 Route::get('auth/top/history', 'App\Http\Controllers\Auth\TopController@postIndex')->name("top.history");
+Route::post('auth/top/test','App\Http\Controllers\Auth\TestController@postCheck')->name("top.test");
