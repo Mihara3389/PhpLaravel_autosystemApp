@@ -48,3 +48,7 @@ body{
     border-radius: 24px;
     transition: 0.25s;
 }
+.form 
+{
+  text-align:right;
+}
