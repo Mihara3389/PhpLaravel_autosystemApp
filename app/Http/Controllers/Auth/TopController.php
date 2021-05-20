@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Common\ListCommon;
 
 class TopController extends Controller
 {
@@ -37,17 +38,10 @@ class TopController extends Controller
     public function postIndex(Request $request)
     {
         if ($request->has('list')) {
-            //selectで使用する変数の初期値設定
-            $lists = DB::select('set @no:=0;');
-            $lists = DB::select('set @groupid:=null;');
-            //質問全件と質問・答えが一致するものを取得
-            //答えがないものはnull
-            //questions.id毎に連番付与
-            $lists = DB::select
-                ('SELECT questions.id as id, questions.question , correct_answers.id as answer_id ,correct_answers.answer as answer,if(@groupid <>  questions.id, @no:=1, @no:=@no+1) as no,@groupid:= questions.id  
-                    FROM questions LEFT JOIN correct_answers ON questions.id = correct_answers.question_id');
-            //問題一覧画面へ遷移
-            return view('auth/top/list',['lists' => $lists]);
+            //共通処理呼び出し
+            $listCommon = new ListCommon();
+            $lists = $listCommon->returnList();
+            return view('auth/top/list', ['lists' => $lists]);
         } elseif ($request->has('test')) {
             //質問と答えが紐づく問題のみ取得
             $questions = DB::select('SELECT DISTINCT questions.id as id, questions.question as question FROM questions INNER JOIN correct_answers ON questions.id = correct_answers.question_id;');
