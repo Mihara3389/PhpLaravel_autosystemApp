@@ -41,11 +41,12 @@ class TopController extends Controller
             //共通処理呼び出し
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
-            if(issert($lists)){
+            if (empty($lists)) {
                 //新規登録画面へ遷移
                 return view('auth/top/list/register');
+            }else{
+                return view('auth/top/list', ['lists' => $lists]);
             }
-            return view('auth/top/list', ['lists' => $lists]);
         } elseif ($request->has('test')) {
             //質問と答えが紐づく問題のみ取得
             $questions = DB::select('SELECT DISTINCT questions.id as id, questions.question as question FROM questions INNER JOIN correct_answers ON questions.id = correct_answers.question_id;');
