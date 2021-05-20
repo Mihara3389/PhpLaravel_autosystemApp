@@ -41,6 +41,10 @@ class TopController extends Controller
             //共通処理呼び出し
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
+            if(issert($lists)){
+                //新規登録画面へ遷移
+                return view('auth/top/list/register');
+            }
             return view('auth/top/list', ['lists' => $lists]);
         } elseif ($request->has('test')) {
             //質問と答えが紐づく問題のみ取得

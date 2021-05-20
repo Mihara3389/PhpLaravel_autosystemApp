@@ -3,12 +3,13 @@
 @section('content')
 <div class="container">
     <div class="box">
-           <form method="POST" action="{{ route('top.list') }}">
             @csrf
 
             <h1>{{ __('List') }}</h1>
-            <div><input type="submit" name="register" value="Register"></div>
-            <br>
+            <form method="POST" action="{{ route('top.list') }}">
+                @csrf 
+                <div><input type="submit" name="register" value="Register"></div>
+            </form>
             @foreach ($lists as $list)           
             <table>
                 <tbody>
@@ -18,12 +19,18 @@
                     <td><input type="text" id="id" name="id[]" value="{{ $list->id }}" readonly ></td>
 		            <td><input type="text" id="question" name="question[]"  value="{{ $list->question }}" readonly></td>
                     <td>
-                        <div><input type="submit" name="edit" value="Edit">
-		                <input type="hidden" name="id" value="{{ $list->id }}"></div>
+                        <form method="POST" action="{{ route('top.list') }}">
+                        @csrf 
+                            <div><input type="submit" name="edit" value="Edit">
+		                    <input type="hidden" name="id" value="{{ $list->id }}"></div>
+                        </form>
                     </td>
                     <td>
-                        <div><input type="submit" name="delete" value="Delete">
-		                <input type="hidden" name="id" value="{{ $list->id }}"></div>
+                        <form method="POST" action="{{ route('top.list') }}">
+                        @csrf    
+                            <div><input type="submit" name="delete" value="Delete">
+		                    <input type="hidden" name="id" value="{{ $list->id }}"></div>
+                        </form>
                     </td>
                 </tr>
                 @endif
@@ -41,6 +48,5 @@
                 </tbody>
             </table>
             @endforeach
-        </form>
       </div>
 </div>

@@ -40,11 +40,19 @@ class DeleteController extends Controller
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
+            if(issert($lists)){
+                //新規登録画面へ遷移
+                return view('auth/top/list/register');
+            }
             return view('auth/top/list', ['lists' => $lists]);
         }else if ($request->has('return_list')) {
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
+            if(issert($lists)){
+                //新規登録画面へ遷移
+                return view('auth/top/list/register');
+            }
             return view('auth/top/list', ['lists' => $lists]);
         }
     }
