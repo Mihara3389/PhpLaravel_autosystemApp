@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Common\ListCommon;
 
 class TopController extends Controller
 {
@@ -37,8 +38,15 @@ class TopController extends Controller
     public function postIndex(Request $request)
     {
         if ($request->has('list')) {
-            // ここに問題一覧ボタン押下時の処理
-            $this->list();
+            //共通処理呼び出し
+            $listCommon = new ListCommon();
+            $lists = $listCommon->returnList();
+            if (empty($lists)) {
+                //新規登録画面へ遷移
+                return view('auth/top/list/register');
+            }else{
+                return view('auth/top/list', ['lists' => $lists]);
+            }
         } elseif ($request->has('test')) {
             //質問と答えが紐づく問題のみ取得
             $questions = DB::select('SELECT DISTINCT questions.id as id, questions.question as question FROM questions INNER JOIN correct_answers ON questions.id = correct_answers.question_id;');

@@ -11,11 +11,11 @@
             <table>
                 <tr>
                     <td><input type="text" id="id" name="id[]" value="{{ $question->id }}" readonly ></td>
-		            <td><input type="text" id="question" name="question[]"  value="{{ $question->question }}" readonly></td></tr>
+		            <td><input type="text" id="question" name="question[]"  value="{{ $question->question }}" readonly></td>
                 </tr>
                 <tr>
                     <td> 回答：</td>
-                    <td><input type="text" id="answer" name="answer[]" placeholder="Answer"></td></tr>
+                    <td><input type="text" id="answer" name="answer[]" placeholder="Answer"></td>
                 </tr>
             </table>
             @endforeach
