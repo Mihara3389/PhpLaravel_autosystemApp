@@ -37,6 +37,10 @@ Route::get('auth/top/list/delete', 'App\Http\Controllers\Auth\ListController@pos
 Route::post('auth/top/list/register', 'App\Http\Controllers\Auth\RegisterNewController@postRegister')->name("list.register");
 Route::get('auth/top/list/confirm/register', 'App\Http\Controllers\Auth\RegisterNewController@postRegister')->name("confirm.register");
 Route::post('auth/top/list/confirm/register', 'App\Http\Controllers\Auth\RegisterNewController@postRegister')->name("confirm.register");
+//Edit
+Route::post('auth/top/list/edit', 'App\Http\Controllers\Auth\EditController@postEdit')->name("list.edit");
+Route::get('auth/top/list/confirm/edit', 'App\Http\Controllers\Auth\EditController@postEdit')->name("confirm.edit");
+Route::post('auth/top/list/confirm/edit', 'App\Http\Controllers\Auth\EditController@postEdit')->name("confirm.edit");
 //Delete
 Route::post('auth/top/list/delete', 'App\Http\Controllers\Auth\DeleteController@postDelete')->name("list.delete");
 //Test
