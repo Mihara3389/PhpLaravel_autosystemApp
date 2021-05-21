@@ -52,7 +52,7 @@ class RegisterNewController extends Controller
             $questions = new \App\Models\Questions;
             $questions->question = $question;
             $questions->save();
-            //データベースへ登録：問題
+            //データベースへ登録：答え
             $data = 
                     \App\Models\Questions::select('id')->where('question', '=', $question)->get()->toArray();      
             $question_id = array_values($data[0]);

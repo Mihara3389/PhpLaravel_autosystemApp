@@ -42,7 +42,7 @@ class ListController extends Controller
                 return view('auth/top/list/edit', ['changes' => $changes]);
             } elseif ($request->has('delete')) {
                 $deletions = $data;
-               //削除画面へ遷移
+                //削除画面へ遷移
                 return view('auth/top/list/delete',['deletions' => $deletions]);
             }
         }
