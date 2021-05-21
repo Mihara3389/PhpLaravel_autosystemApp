@@ -42,9 +42,8 @@ class RegisterNewController extends Controller
                     }
                 }
             }
-            return view('auth/top/list/confirm/register', compact('question', 'registers'));
             //新規登録確認画面へ遷移
-            //return view('auth/top/list/confirm/register',['question' => $question, 'registers' => $registers]);
+            return view('auth/top/list/confirm/register', compact('question', 'registers'));
         }  elseif ($request->has('register')) {
             //表示されている値を取得
             $question = $request->input('question');
