@@ -41,16 +41,12 @@ class EditController extends Controller
             if (!empty($answer_ids)) {
                 for ($i = 0; $i < count($answer_ids); ++$i) {
                     for ($j = 0; $j < count($answers); ++$j) {
-                        if ($i === $j) {
-                            if (!empty($answers[$j])) {
-                                if ($bf === $answers[$j]) {
-                                } else {
+                        if ($i !== $j) continue;
+                            if  (empty($answers[$j])) continue;
+                                if ($bf === $answers[$j]) continue;
                                     $aid_list[] = $answer_ids[$i];
                                     $answer_list[] = $answers[$j];
                                     $bf = $answers[$j];
-                                }
-                            }
-                        }
                     }
                 }
                 //編集確認画面へ遷移
@@ -102,7 +98,7 @@ class EditController extends Controller
             //データベースへ更新：答え
             for ($k = 0; $k < count($answer_ids); ++$k) {
                 for ($l = 0; $l < count($answers); ++$l) {
-                    if ($k === $l) {                     
+                    if ($k !== $l) continue;
                         if (strcmp($answer_ids[$k], 'new') == 0) {
                             $correct_answers = new \App\Models\Answers;
                             $correct_answers->question_id = $id;
@@ -114,7 +110,6 @@ class EditController extends Controller
                             $correct_answers->answer = $answers[$l];
                             $correct_answers->save();  
                         }
-                    }
                 }
             }
             //問題一覧画面へ遷移
