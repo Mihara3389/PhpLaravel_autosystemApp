@@ -1,32 +1,29 @@
-@extends('layouts.app4')
+@extends('layouts.app6')
 
 @section('content')
 <div class="container">
-    <div class="box">
+    <div class="confirm">
         <h1>{{ __('Register') }}</h1>
             <form method="POST" action="{{ route('list.register') }}">
             @csrf
 
-            <div>
-                <input id="question" type="text" class="form-control @error('question') is-invalid @enderror" name="question" value="{{ old('question') }}" placeholder="Question" required autocomplete="question" autofocus>
-
-                @error('question')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div>
-                <input id="answer" type="text" class="form-control @error('answer') is-invalid @enderror" name="answer[]" placeholder="Answer" required autocomplete="answer">
-
-                @error('answer')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <input id="submit" type="submit" name="Return_list" value="Return">
-            <input id="submit" type="submit" name="submit" value="Check">
+            <table  id="tbl">
+                <tobody>
+                <tr>
+                    <td>問題：</td>
+		            <td><input type="text" id="question" name="question" placeholder="Question"></td>
+                </tr>
+                </tobody>
+                <tobody>
+                <tr>
+                    <td> 答え：</td>
+                    <td><input type="text" id="answer" name="answer[]" placeholder="Answer"></td>
+                </tr>
+                </tobody>
+            </table>
+            <br>
+            <input id="submit" type="submit" name="return_list" value="Return">
+            <input id="submit" type="submit" name="check" value="Check">
             <input type="button" name="Add" value="Add" onclick="appendRow()">
         </form>
     </div>
