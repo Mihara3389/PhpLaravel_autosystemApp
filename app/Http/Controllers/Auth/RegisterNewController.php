@@ -51,6 +51,7 @@ class RegisterNewController extends Controller
             //データベースへ登録：問題
             $questions = new \App\Models\Questions;
             $questions->question = $question;
+            $questions->created_at = now();
             $questions->save();
             //データベースへ登録：答え
             $data = 
@@ -60,6 +61,7 @@ class RegisterNewController extends Controller
                 $answers = new \App\Models\Answers;
                 $answers->question_id = $question_id[0];
                 $answers->answer = $answer;
+                $answers->created_at = now();
                 $answers->save();      
             }
             //問題一覧画面へ遷移

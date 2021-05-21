@@ -65,6 +65,7 @@ class EditController extends Controller
             $questions = new \App\Models\Questions;
             $questions = \App\Models\Questions::find($id);
             $questions->question = $question;
+            $questions->updated_at = now();
             $questions->save();
             //問題idに一致する答えを全件取得する
             $answer_db = new \App\Models\Answers;
@@ -103,11 +104,13 @@ class EditController extends Controller
                             $correct_answers = new \App\Models\Answers;
                             $correct_answers->question_id = $id;
                             $correct_answers->answer = $answers[$l];
+                            $correct_answers->created_at = now();
                             $correct_answers->save();   
                         } else {
                             $correct_answers = new \App\Models\Answers;
                             $correct_answers = \App\Models\Answers::find($answer_ids[$k]);
                             $correct_answers->answer = $answers[$l];
+                            $correct_answers->updated_at = now();
                             $correct_answers->save();  
                         }
                 }
