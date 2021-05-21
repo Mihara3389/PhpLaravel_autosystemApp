@@ -39,6 +39,7 @@ body{
 }
  .box h1,.confirm h1{
     padding: 40px 0 10px 0;
+    text-transform:none;
  }
  .box div{
     padding: 5px 5px;
