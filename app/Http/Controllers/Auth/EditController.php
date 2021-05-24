@@ -49,16 +49,16 @@ class EditController extends Controller
                      ->withInput();
             }
             //答えの空白&重複チェック
-            $bf = "";
+            $bf = [];
             if (!empty($answer_ids)) {
                 for ($i = 0; $i < count($answer_ids); ++$i) {
                     for ($j = 0; $j < count($answers); ++$j) {
                         if ($i !== $j) continue;
                             if  (empty($answers[$j])) continue;
-                                if ($bf === $answers[$j]) continue;
+                                if (in_array($answers[$j], $bf, false)) continue;
                                     $aid_list[] = $answer_ids[$i];
                                     $answer_list[] = $answers[$j];
-                                    $bf = $answers[$j];
+                                    $bf[] = $answers[$j];
                     }
                 }
                 //編集確認画面へ遷移

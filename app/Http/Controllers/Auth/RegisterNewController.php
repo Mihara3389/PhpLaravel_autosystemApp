@@ -43,14 +43,12 @@ class RegisterNewController extends Controller
                      ->withInput();
             }
             //答えの空白&重複チェック
-            $bf = "";
+            $bf = [];
             foreach($answers as $answer){
                 if(!empty($answer)){
-                    if($bf === $answer){
-                    }else{
-                        $registers[] = $answer;
-                        $bf = $answer;
-                    }
+                    if (in_array($answer, $bf,  false)) continue;
+                       $registers[] = $answer;
+                        $bf[] = $answer;
                 }
             }
             //新規登録確認画面へ遷移
