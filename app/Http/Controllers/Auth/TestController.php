@@ -67,8 +67,7 @@ class TestController extends Controller
             $history->point = $point;
             $history->save();
             //採点結果画面へ遷移
-            return view('auth/top/test/result', 
-                    ['all_count' => $all_count,'correct_count' => $correct_count,'point' => $point,'now' => $now]);
+            return view('auth/top/test/result',  compact('all_count','correct_count','point','now'));
         }
     }
 }

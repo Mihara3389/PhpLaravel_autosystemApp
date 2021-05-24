@@ -45,7 +45,7 @@ class TopController extends Controller
                 //新規登録画面へ遷移
                 return view('auth/top/list/register');
             }else{
-                return view('auth/top/list', ['lists' => $lists]);
+                return view('auth/top/list', compact('lists'));
             }
         } elseif ($request->has('test')) {
             //質問と答えが紐づく問題のみ取得
@@ -53,14 +53,14 @@ class TopController extends Controller
             //質問をshuffleする
             shuffle($questions);
             //テスト画面へ遷移
-            return view('auth/top/test',['questions' => $questions]);
+            return view('auth/top/test',compact('questions'));
         } elseif ($request->has('history')){
             //ログイン中ユーザーのidを取得
 	        $auths = Auth::id();
             //ログイン中ユーザーと紐づく履歴を取得
             $history_list = \App\Models\History::where('user_id', '=', $auths)->get(); 
             //履歴画面へ遷移
-            return view('auth/top/history',['history_list' => $history_list]);
+            return view('auth/top/history',compact('history_list'));
         }
     }
 }

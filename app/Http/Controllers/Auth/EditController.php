@@ -130,12 +130,12 @@ class EditController extends Controller
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
-            return view('auth/top/list', ['lists' => $lists]);
+            return view('auth/top/list', compact('lists'));
         }elseif ($request->has('return_list')) {
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
-            return view('auth/top/list', ['lists' => $lists]);
+            return view('auth/top/list', compact('lists'));
         }elseif ($request->has('return_edit')) {
             //idを取得
             $id = $request->input('id');
@@ -144,7 +144,7 @@ class EditController extends Controller
             $data = $listCommon->returnList($id);
             //編集画面へ遷移
             $changes = $data;
-            return view('auth/top/list/edit', ['changes' => $changes]);
+            return view('auth/top/list/edit', compact('changes'));
        
         }
     }

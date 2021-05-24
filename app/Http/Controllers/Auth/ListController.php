@@ -39,11 +39,11 @@ class ListController extends Controller
             if ($request->has('edit')) {
                 $changes = $data;
                 //編集画面へ遷移
-                return view('auth/top/list/edit', ['changes' => $changes]);
+                return view('auth/top/list/edit', compact('changes'));
             } elseif ($request->has('delete')) {
                 $deletions = $data;
                 //削除画面へ遷移
-                return view('auth/top/list/delete',['deletions' => $deletions]);
+                return view('auth/top/list/delete',compact('deletions'));
             }
         }
     }
