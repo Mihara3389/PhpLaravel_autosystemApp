@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Common\ListCommon;
 use App\Common\ListCommon2;
-use App\Common\Validation;
-use Validator;
+use App\Common\Validation2;
+use Illuminate\Support\Facades\Validator;
 
 class EditController extends Controller
 {
@@ -40,7 +40,7 @@ class EditController extends Controller
             //セッションへidを格納
             $request->session()->put('key', $id);
             //バリデーション実装
-            $Validation = new Validation();
+            $Validation = new Validation2();
             $validator = $Validation->rules($request);
             // バリデーション（エラーがある場合は前の画面に戻ります）
             if ($validator->fails()) {
