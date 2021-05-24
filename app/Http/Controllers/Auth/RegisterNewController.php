@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Common\ListCommon;
 use App\Common\Validation;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterNewController extends Controller
 {
@@ -30,6 +30,9 @@ class RegisterNewController extends Controller
     public function postRegister(Request $request)
     {
         if ($request->has('check')) {
+            //入力値取得
+            $question = $request->input('question');
+            $answers = $request->input('answer');
             //バリデーション実装
             $Validation = new Validation();
             $validator = $Validation->rules($request);
@@ -39,9 +42,6 @@ class RegisterNewController extends Controller
                      ->withErrors($validator)
                      ->withInput();
             }
-            //入力値取得
-            $question = $request->input('question');
-            $answers = $request->input('answer');
             //答えの空白&重複チェック
             $bf = "";
             foreach($answers as $answer){
