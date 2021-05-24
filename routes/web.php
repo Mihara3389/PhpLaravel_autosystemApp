@@ -45,3 +45,6 @@ Route::post('auth/top/list/confirm/edit', 'App\Http\Controllers\Auth\EditControl
 Route::post('auth/top/list/delete', 'App\Http\Controllers\Auth\DeleteController@postDelete')->name("list.delete");
 //Test
 Route::post('auth/top/test','App\Http\Controllers\Auth\TestController@postCheck')->name("top.test");
+//Redirect
+Route::get('redirect/register', 'App\Http\Controllers\Auth\RedirectController@indexRegister');
+Route::get('redirect/edit', 'App\Http\Controllers\Auth\RedirectController@indexEdit');

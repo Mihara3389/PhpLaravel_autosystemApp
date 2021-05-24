@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Common\ListCommon;
 use App\Common\ListCommon2;
+use App\Common\Validation;
+use Validator;
 
 class EditController extends Controller
 {
@@ -20,7 +22,6 @@ class EditController extends Controller
     {
         $this->middleware('auth');
     }
-    
     /**
      * change transition
      *
@@ -36,6 +37,17 @@ class EditController extends Controller
             $question = $question_aray[0];
             $answer_ids = $request->input('answer_id');
             $answers = $request->input('answer');
+            //セッションへidを格納
+            $request->session()->put('key', $id);
+            //バリデーション実装
+            $Validation = new Validation();
+            $validator = $Validation->rules($request);
+            // バリデーション（エラーがある場合は前の画面に戻ります）
+            if ($validator->fails()) {
+                return redirect('redirect/edit')
+                     ->withErrors($validator)
+                     ->withInput();
+            }
             //答えの空白&重複チェック
             $bf = "";
             if (!empty($answer_ids)) {

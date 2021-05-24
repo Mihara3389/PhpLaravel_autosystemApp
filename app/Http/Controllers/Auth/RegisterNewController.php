@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Common\ListCommon;
+use App\Common\Validation;
+use Validator;
 
 class RegisterNewController extends Controller
 {
@@ -28,6 +30,15 @@ class RegisterNewController extends Controller
     public function postRegister(Request $request)
     {
         if ($request->has('check')) {
+            //バリデーション実装
+            $Validation = new Validation();
+            $validator = $Validation->rules($request);
+            // バリデーション（エラーがある場合は前の画面に戻ります）
+            if ($validator->fails()) {
+                return redirect('redirect/register')
+                     ->withErrors($validator)
+                     ->withInput();
+            }
             //入力値取得
             $question = $request->input('question');
             $answers = $request->input('answer');
