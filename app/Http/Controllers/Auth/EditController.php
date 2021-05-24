@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Common\ListCommon;
 use App\Common\ListCommon2;
+use App\Common\Validation2;
+use Illuminate\Support\Facades\Validator;
 
 class EditController extends Controller
 {
@@ -20,7 +22,6 @@ class EditController extends Controller
     {
         $this->middleware('auth');
     }
-    
     /**
      * change transition
      *
@@ -36,17 +37,28 @@ class EditController extends Controller
             $question = $question_aray[0];
             $answer_ids = $request->input('answer_id');
             $answers = $request->input('answer');
+            //セッションへidを格納
+            $request->session()->put('key', $id);
+            //バリデーション実装
+            $Validation = new Validation2();
+            $validator = $Validation->rules($request);
+            // バリデーション（エラーがある場合は前の画面に戻ります）
+            if ($validator->fails()) {
+                return redirect('redirect/edit')
+                     ->withErrors($validator)
+                     ->withInput();
+            }
             //答えの空白&重複チェック
-            $bf = "";
+            $bf = [];
             if (!empty($answer_ids)) {
                 for ($i = 0; $i < count($answer_ids); ++$i) {
                     for ($j = 0; $j < count($answers); ++$j) {
                         if ($i !== $j) continue;
                             if  (empty($answers[$j])) continue;
-                                if ($bf === $answers[$j]) continue;
+                                if (in_array($answers[$j], $bf, false)) continue;
                                     $aid_list[] = $answer_ids[$i];
                                     $answer_list[] = $answers[$j];
-                                    $bf = $answers[$j];
+                                    $bf[] = $answers[$j];
                     }
                 }
                 //編集確認画面へ遷移
@@ -65,6 +77,7 @@ class EditController extends Controller
             $questions = new \App\Models\Questions;
             $questions = \App\Models\Questions::find($id);
             $questions->question = $question;
+            $questions->updated_at = now();
             $questions->save();
             //問題idに一致する答えを全件取得する
             $answer_db = new \App\Models\Answers;
@@ -103,11 +116,13 @@ class EditController extends Controller
                             $correct_answers = new \App\Models\Answers;
                             $correct_answers->question_id = $id;
                             $correct_answers->answer = $answers[$l];
+                            $correct_answers->created_at = now();
                             $correct_answers->save();   
                         } else {
                             $correct_answers = new \App\Models\Answers;
                             $correct_answers = \App\Models\Answers::find($answer_ids[$k]);
                             $correct_answers->answer = $answers[$l];
+                            $correct_answers->updated_at = now();
                             $correct_answers->save();  
                         }
                 }
@@ -115,12 +130,12 @@ class EditController extends Controller
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
-            return view('auth/top/list', ['lists' => $lists]);
+            return view('auth/top/list', compact('lists'));
         }elseif ($request->has('return_list')) {
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
-            return view('auth/top/list', ['lists' => $lists]);
+            return view('auth/top/list', compact('lists'));
         }elseif ($request->has('return_edit')) {
             //idを取得
             $id = $request->input('id');
@@ -129,7 +144,7 @@ class EditController extends Controller
             $data = $listCommon->returnList($id);
             //編集画面へ遷移
             $changes = $data;
-            return view('auth/top/list/edit', ['changes' => $changes]);
+            return view('auth/top/list/edit', compact('changes'));
        
         }
     }

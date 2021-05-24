@@ -44,13 +44,13 @@ class DeleteController extends Controller
                 //新規登録画面へ遷移
                 return view('auth/top/list/register');
             }else{
-                return view('auth/top/list', ['lists' => $lists]);
+                return view('auth/top/list',compact('lists'));
             }
         }else if ($request->has('return_list')) {
             //問題一覧画面へ遷移
             $listCommon = new ListCommon();
             $lists = $listCommon->returnList();
-            return view('auth/top/list', ['lists' => $lists]);
+            return view('auth/top/list', compact('lists'));
         }
     }
 }

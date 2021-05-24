@@ -11,13 +11,25 @@
                 <tobody>
                 <tr>
                     <td>問題：</td>
-		            <td><input type="text" id="question" name="question" placeholder="Question"></td>
+		            <td><input type="text" id="question"　class="form-control @error('question') is-invalid @enderror" name="question" placeholder="Question">
+                        @error('question')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </td>
                 </tr>
                 </tobody>
                 <tobody>
                 <tr>
                     <td> 答え：</td>
-                    <td><input type="text" id="answer" name="answer[]" placeholder="Answer"></td>
+                    <td><input type="text" id="answer" class="form-control @error('answer.*') is-invalid @enderror"　name="answer[]" placeholder="Answer">
+                        @error('answer.*')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </td>
                 </tr>
                 </tobody>
             </table>
